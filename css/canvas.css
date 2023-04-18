@@ -1,0 +1,55 @@
+:root {
+  --zoomLevel: 1;
+}
+
+#canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border: 1px solid white;
+  width: fit-content;
+}
+
+#canvas[tool='pencil'] {
+  cursor: url('../assets/pencil.cur'), default;
+}
+
+#canvas[tool='eraser'] {
+  cursor: url('../assets/eraser.cur'), default;
+}
+
+#canvas[tool='eraser'] td[hover] {
+  color: black;
+  background-color: black;
+  box-shadow: 0 0 0 1px white;
+}
+
+#canvas[tool='zoom'] {
+  cursor: zoom-in;
+}
+
+#canvas table:not(:first-child) {
+  position: absolute;
+  top: 0px;
+}
+
+.layer,
+#preview-layer {
+  border-spacing: 0;
+  position: relative;
+  user-select: none;
+}
+
+#preview-layer {
+  z-index: 1;
+}
+
+.pixel {
+  font-family: Terminal;
+  font-size: calc(12px * var(--zoomLevel)) !important;
+  height: calc(12px * var(--zoomLevel));
+  width: calc(8px * var(--zoomLevel));
+  padding: 0px;
+}

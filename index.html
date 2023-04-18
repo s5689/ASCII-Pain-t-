@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ASCII Pain(t)</title>
+
+    <link rel="stylesheet" href="/css/main.css" />
+    <script type="module" src="/js/main.js"></script>
+  </head>
+
+  <body>
+    <div id="panel-top">
+      <div id="char-preview"></div>
+      <div id="color-picker"></div>
+
+      <div id="tool-picker">
+        <div id="tool-picker-top"></div>
+
+        <div id="tool-picker-bottom">
+          <button id="tool-pencil"></button>
+          <button id="tool-eraser"></button>
+          <button id="tool-zoom"></button>
+        </div>
+      </div>
+
+      <div id="set-canvas-size">
+        <input id="x" type="number" autocomplete="off" />
+        <input id="y" type="number" autocomplete="off" />
+        <button>Aplicar</button>
+      </div>
+
+      <button id="add-layer">Agregar Layer</button>
+    </div>
+
+    <div id="panel-left">
+      <select id="char-selector"></select>
+      <div id="char-picker"></div>
+    </div>
+
+    <div id="canvas">
+      <table id="preview-layer">
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="test" style="font-family: Terminal"></div>
+  </body>
+</html>

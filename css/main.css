@@ -1,0 +1,13 @@
+@import 'panel/top.css';
+@import 'panel/left.css';
+@import 'canvas.css';
+
+@font-face {
+  font-family: Terminal;
+  src: url(../assets/TerminalVector.ttf);
+}
+
+body {
+  background-color: black;
+  color: white;
+}
