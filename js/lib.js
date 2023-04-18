@@ -33,3 +33,19 @@ export function q(q, c) {
     c(value);
   });
 }
+
+/**
+ * #### Selector de clases CSS por query's.
+ * Acepta un argumento como parametro.
+ *
+ * -------------------
+ * `e`: ID a seleccionar.
+ *
+ * -------------------
+ * Retorna la lista de propiedades CSS adheridas al elemento. Incluye aquellas definidas por las clases.
+ *
+ * (El valor retornado es solo lectura).
+ */
+export function c(e) {
+  return getComputedStyle(g(e));
+}

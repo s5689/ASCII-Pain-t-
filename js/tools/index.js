@@ -3,8 +3,12 @@ import { g, q } from '../lib';
 import './pencil';
 import './eraser';
 import './zoom';
+import './move';
 
 export const event = {
+  global_contextmenu: function () {},
+  global_mousedown: function () {},
+  global_mousemove: function () {},
   canvas_mouseleave: function () {},
   mouseover: function () {},
   mousedown: function () {},
@@ -34,6 +38,9 @@ export default function buildToolEvents() {
   // Eventos generales (Solo asignar una vez)
   if (!init) {
     g('canvas').addEventListener('mouseleave', (e) => event.canvas_mouseleave(getParams(e)));
+    document.addEventListener('contextmenu', (e) => event.global_contextmenu(getParams(e)));
+    document.addEventListener('mousedown', (e) => event.global_mousedown(getParams(e)));
+    document.addEventListener('mousemove', (e) => event.global_mousemove(getParams(e)));
     document.addEventListener('mouseup', (e) => event.mouseup(getParams(e)));
 
     init = true;

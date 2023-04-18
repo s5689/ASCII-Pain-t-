@@ -5,8 +5,10 @@
   width: 100%;
   height: 80px;
 
+  background-color: black;
   border-bottom: 1px solid white;
   user-select: none;
+  z-index: 10;
 }
 
 #char-preview {
@@ -136,6 +138,21 @@
 
 #tool-picker[tool='zoom'] #tool-zoom {
   background: url('../../assets/zoom-btn2.svg') no-repeat center center / 34px;
+}
+
+/* Mover */
+#tool-move {
+  background: url('../../assets/move-btn.svg') no-repeat center -10px/ 42px;
+}
+
+#tool-picker:not([tool='move']):not([tool='moving']) #tool-move:hover {
+  background: url('../../assets/move-btn2.svg') no-repeat center -10px/ 42px;
+  filter: invert(0.6);
+}
+
+#tool-picker[tool='move'] #tool-move,
+#tool-picker[tool='moving'] #tool-move {
+  background: url('../../assets/move-btn2.svg') no-repeat center -10px/ 42px;
 }
 
 /* temp */

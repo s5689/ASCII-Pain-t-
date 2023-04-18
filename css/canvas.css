@@ -4,12 +4,11 @@
 
 #canvas {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 130px;
+  left: 250px;
 
   border: 1px solid white;
-  width: fit-content;
+  width: max-content;
 }
 
 #canvas[tool='pencil'] {
@@ -28,6 +27,14 @@
 
 #canvas[tool='zoom'] {
   cursor: zoom-in;
+}
+
+#canvas[tool='move'] {
+  cursor: grab;
+}
+
+#canvas[tool='moving'] {
+  cursor: grabbing;
 }
 
 #canvas table:not(:first-child) {
