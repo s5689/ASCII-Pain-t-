@@ -43,14 +43,14 @@ export default function buildToolEvents() {
     document.addEventListener('mousemove', (e) => event.global_mousemove(getParams(e)));
     document.addEventListener('mouseup', (e) => event.mouseup(getParams(e)));
 
+    // Asignar atributo de la herramienta donde se requiera en el DOM.
+    CURRENT_PICKS.onToolChange('tool-declaration', (e) => {
+      g('canvas').setAttribute('tool', e);
+      g('tool-picker').setAttribute('tool', e);
+    });
+
     init = true;
   }
-}
-
-// Asignar atributo de la herramienta donde se requiera en el DOM.
-export function declareTool(e) {
-  g('canvas').setAttribute('tool', e);
-  g('tool-picker').setAttribute('tool', e);
 }
 
 function getParams(e) {

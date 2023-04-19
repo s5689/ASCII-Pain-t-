@@ -104,4 +104,28 @@ export const CURRENT_PICKS = {
   set layer(e) {
     this._layer = e;
   },
+
+  /*
+    Tool
+
+  */
+  _tool: null,
+  toolCallbacks: {},
+
+  get tool() {
+    return this._tool;
+  },
+
+  set tool(e) {
+    this._tool = e;
+    Object.values(this.toolCallbacks).forEach((value) => value(e));
+  },
+
+  onToolChange(id, e) {
+    this.toolCallbacks[id] = e;
+  },
+
+  offToolCallback(id) {
+    delete this.toolCallbacks[id];
+  },
 };

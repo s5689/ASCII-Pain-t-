@@ -1,6 +1,6 @@
 import { CURRENT_PICKS } from '../globals';
 import { LAYER_MAP } from '../settings/canvas';
-import { declareTool, event } from '.';
+import { event } from '.';
 import { g } from '../lib';
 
 export const eraserSize = {
@@ -27,8 +27,8 @@ g('tool-eraser').addEventListener('click', () => {
   let pressed = false;
   let onCanvas = false;
 
-  // Declarar Herramienta en el DOM
-  declareTool('eraser');
+  // Declarar Herramienta
+  CURRENT_PICKS.tool = 'eraser';
 
   //Asignar Eventos
   event.unbindAll();
@@ -79,6 +79,10 @@ g('tool-eraser').addEventListener('click', () => {
       if (onCanvas) event.mouseover({ preview: prevPixel });
     }
   };
+
+  CURRENT_PICKS.onToolChange('tool-eraser', () => {
+    cleanPrev();
+  });
 
   // Funciones Internas
   function renderLayer(e) {

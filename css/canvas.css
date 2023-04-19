@@ -9,6 +9,8 @@
 
   border: 1px solid white;
   width: max-content;
+
+  cursor: default;
 }
 
 #canvas[tool='pencil'] {
@@ -31,10 +33,6 @@
 
 #canvas[tool='move'] {
   cursor: grab;
-}
-
-#canvas[tool='moving'] {
-  cursor: grabbing;
 }
 
 #canvas table:not(:first-child) {

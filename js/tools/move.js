@@ -1,23 +1,21 @@
-import { declareTool, event } from '.';
+import { CURRENT_PICKS } from '../globals';
+import { event } from '.';
 import { c, g } from '../lib';
 
 const canvas = g('canvas');
 const canvasCss = c('canvas');
 
-g('tool-move').addEventListener('click', () => triggerMove());
-
-export function triggerMove(e = true) {
+g('tool-move').addEventListener('click', () => {
   let pressed = false;
 
-  // Declarar Herramienta en el DOM
-  declareTool('move');
+  // Declarar Herramienta
+  CURRENT_PICKS.tool = 'move';
 
   // Asignar Eventos
   event.unbindAll();
 
   event.mousedown = () => {
     pressed = true;
-    declareTool('moving');
   };
 
   event.global_mousemove = ({ event }) => {
@@ -33,11 +31,6 @@ export function triggerMove(e = true) {
   };
 
   event.mouseup = () => {
-    if (e) {
-      declareTool('move');
-      pressed = false;
-    } else {
-      event.unbindAll();
-    }
+    pressed = false;
   };
-}
+});

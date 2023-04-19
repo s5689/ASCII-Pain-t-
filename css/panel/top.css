@@ -150,8 +150,7 @@
   filter: invert(0.6);
 }
 
-#tool-picker[tool='move'] #tool-move,
-#tool-picker[tool='moving'] #tool-move {
+#tool-picker[tool='move'] #tool-move {
   background: url('../../assets/move-btn2.svg') no-repeat center -10px/ 42px;
 }
 

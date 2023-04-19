@@ -1,13 +1,13 @@
 import { CURRENT_PICKS } from '../globals';
-import { declareTool, event } from '.';
+import { event } from '.';
 import { g } from '../lib';
 
 g('tool-pencil').addEventListener('click', () => {
   let prevPixel = { style: { color: '', background: '' } };
   let pressed = false;
 
-  // Declarar Herramienta en el DOM
-  declareTool('pencil');
+  // Declarar Herramienta
+  CURRENT_PICKS.tool = 'pencil';
 
   // Asignar Eventos
   event.unbindAll();
@@ -38,6 +38,10 @@ g('tool-pencil').addEventListener('click', () => {
   event.canvas_mouseleave = () => {
     cleanPrev();
   };
+
+  CURRENT_PICKS.onToolChange('tool-pencil', () => {
+    cleanPrev();
+  });
 
   // Funciones Internas
   function renderLayer(e) {

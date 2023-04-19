@@ -1,12 +1,13 @@
-import { declareTool, event } from '.';
+import { CURRENT_PICKS } from '../globals';
+import { event } from '.';
 import { g } from '../lib';
 
 const css = document.querySelector(':root');
 const cssVar = getComputedStyle(css);
 
 g('tool-zoom').addEventListener('click', () => {
-  // Declarar Herramienta en el DOM
-  declareTool('zoom');
+  // Declarar Herramienta
+  CURRENT_PICKS.tool = 'zoom';
 
   // Asignar Eventos
   event.unbindAll();

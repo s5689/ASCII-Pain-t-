@@ -1,5 +1,5 @@
 import { eraserSize } from './tools/eraser';
-import { triggerMove } from './tools/move';
+import { event } from './tools';
 import { g } from './lib';
 
 let prevAction = null;
@@ -29,7 +29,7 @@ document.addEventListener('keydown', (e) => {
       case ' ': {
         if (prevAction !== 'move' && prevAction !== 'moving') {
           prevAction = g('canvas').getAttribute('tool');
-          triggerMove(false);
+          g(`tool-move`).click();
         }
 
         break;
@@ -46,6 +46,7 @@ document.addEventListener('keyup', (e) => {
       } else {
         g('canvas').removeAttribute('tool');
         g('tool-picker').removeAttribute('tool');
+        event.unbindAll();
       }
 
       prevAction = null;
