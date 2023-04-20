@@ -1,5 +1,6 @@
-@import 'panel/top.css';
 @import 'panel/left.css';
+@import 'panel/top.css';
+@import 'panel/right.css';
 @import 'canvas.css';
 
 @font-face {
@@ -8,6 +9,7 @@
 }
 
 body {
+  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
   background-color: black;
   color: white;
   overflow: hidden;

@@ -11,6 +11,11 @@
   </head>
 
   <body>
+    <div id="panel-left">
+      <select id="char-selector"></select>
+      <div id="char-picker"></div>
+    </div>
+
     <div id="panel-top">
       <div id="char-preview"></div>
       <div id="color-picker"></div>
@@ -25,19 +30,32 @@
           <button id="tool-move"></button>
         </div>
       </div>
-
-      <div id="set-canvas-size">
-        <input id="x" type="number" autocomplete="off" />
-        <input id="y" type="number" autocomplete="off" />
-        <button>Aplicar</button>
-      </div>
-
-      <button id="add-layer">Agregar Layer</button>
     </div>
 
-    <div id="panel-left">
-      <select id="char-selector"></select>
-      <div id="char-picker"></div>
+    <div id="panel-right">
+      <div id="history"></div>
+
+      <form id="set-canvas-size">
+        <label>Tamaño del Lienzo</label>
+        <span>X:</span>
+        <input id="x" type="number" autocomplete="off" required />
+
+        <span>Y:</span>
+        <input id="y" type="number" autocomplete="off" required />
+
+        <button>Aplicar</button>
+      </form>
+
+      <div id="layer-options">
+        <div id="layer-options-header">
+          <input type="range" id="transparency" value="0" min="0" max="100" step="10" />
+          <span id="transparency-value">0%</span>
+
+          <button id="add-layer">+</button>
+        </div>
+
+        <div id="layers-options-container"></div>
+      </div>
     </div>
 
     <div id="canvas">
@@ -45,7 +63,5 @@
         <tbody></tbody>
       </table>
     </div>
-
-    <div id="test" style="font-family: Terminal"></div>
   </body>
 </html>

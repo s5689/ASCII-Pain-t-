@@ -14,6 +14,22 @@ export function g(e) {
 
 /**
  * #### Selector compuesto por query's.
+ * Acepta un argumento como parametro.
+ *
+ * -------------------
+ * `q`: Query de seleccion.
+ *
+ * ---------------------------------
+ * Es un selector al estilo jQuery.
+ *
+ * Es un querySelector resumido.
+ */
+export function $(q) {
+  return document.querySelector(q);
+}
+
+/**
+ * #### Selector compuesto por query's.
  * Acepta argumentos como parametros.
  *
  * -------------------

@@ -95,14 +95,24 @@ export const CURRENT_PICKS = {
     Layer
   
   */
-  _layer: 0,
+  _layer: null,
+  layerCallbacks: {},
 
   get layer() {
     return this._layer;
   },
 
   set layer(e) {
+    Object.values(this.layerCallbacks).forEach((value) => value(e));
     this._layer = e;
+  },
+
+  onLayerChange(id, e) {
+    this.layerCallbacks[id] = e;
+  },
+
+  offLayerCallback(id) {
+    delete this.layerCallbacks[id];
   },
 
   /*

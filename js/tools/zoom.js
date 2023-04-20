@@ -1,8 +1,8 @@
 import { CURRENT_PICKS } from '../globals';
 import { event } from '.';
-import { g } from '../lib';
+import { $, g } from '../lib';
 
-const css = document.querySelector(':root');
+const css = $(':root');
 const cssVar = getComputedStyle(css);
 
 g('tool-zoom').addEventListener('click', () => {

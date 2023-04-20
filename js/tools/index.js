@@ -1,5 +1,5 @@
 import { CURRENT_PICKS } from '../globals';
-import { g, q } from '../lib';
+import { $, g, q } from '../lib';
 import './pencil';
 import './eraser';
 import './zoom';
@@ -60,7 +60,7 @@ function getParams(e) {
   // Si el evento ocurrio en el Canvas, enviar como objetivo la celda del Layer actualmente seleccionado
   if (e.target.offsetParent !== null) {
     if (e.target.offsetParent.id === 'preview-layer') {
-      target = document.querySelector(`.layer[n="${CURRENT_PICKS.layer}"] #${e.target.id}`);
+      target = $(`.layer[n="${CURRENT_PICKS.layer}"] #${e.target.id}`);
       preview = e.target;
     }
   }

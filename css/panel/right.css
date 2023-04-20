@@ -1,0 +1,248 @@
+#panel-right {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  height: 100%;
+  width: 200px;
+
+  background-color: black;
+  border-left: 1px solid white;
+  user-select: none;
+  z-index: 9;
+}
+
+#history {
+  position: relative;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  height: 30%;
+  width: 180px;
+  border: 1px solid white;
+
+  overflow: scroll;
+  user-select: none;
+}
+
+#history::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+  Tamaño del Canvas
+
+*/
+#set-canvas-size {
+  font-size: 15px;
+  position: relative;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 64px;
+
+  text-align: center;
+}
+
+#set-canvas-size label {
+  display: block;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#set-canvas-size input {
+  width: 25px;
+  margin-top: 1rem;
+
+  color: white;
+  background-color: black;
+  border: 1px solid white;
+
+  transition: color 250ms, background-color 250ms, border-color 250ms;
+}
+
+#set-canvas-size input:focus {
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+}
+
+#set-canvas-size input::-webkit-outer-spin-button,
+#set-canvas-size input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#set-canvas-size button {
+  color: white;
+  background-color: black;
+  border: 1px solid white;
+
+  margin-left: 0.5rem;
+  cursor: pointer;
+
+  transition: color 250ms, background-color 250ms;
+}
+
+#set-canvas-size button:hover {
+  color: black;
+  background-color: white;
+}
+
+/*
+  Layer Options
+
+*/
+#layer-options {
+  position: relative;
+  top: calc(32px + 1.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  height: calc(100% - (30% + 64px + 32px + 7.5rem));
+  width: 180px;
+
+  border: 1px solid white;
+  overflow: scroll;
+  user-select: none;
+}
+
+#layer-options::-webkit-scrollbar {
+  display: none;
+}
+
+#layer-options-header {
+  width: 100%;
+  height: 38px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#layer-options-header #transparency {
+  position: absolute;
+  top: 8px;
+  left: 5px;
+  width: 90px;
+  background-color: black;
+  border: 1px solid white;
+  padding: 1px;
+
+  transition: background-color 250ms;
+  -webkit-appearance: none;
+}
+
+#layer-options-header #transparency:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#layer-options-header #transparency:active {
+  background-color: white;
+}
+
+#layer-options-header #transparency::-webkit-slider-thumb {
+  height: 15px;
+  width: 15px;
+  border: 1px solid #000;
+  background-color: white;
+
+  transition: background-color 250ms;
+  cursor: pointer;
+
+  -webkit-appearance: none;
+}
+
+#layer-options-header #transparency[disabled]::-webkit-slider-thumb {
+  background-color: rgba(0, 0, 0, 0) !important;
+  border: none !important;
+  cursor: not-allowed !important;
+}
+
+#layer-options-header #transparency:active::-webkit-slider-thumb {
+  background-color: black;
+}
+
+#layer-options-header #transparency-value {
+  position: absolute;
+  top: 8px;
+  left: 105px;
+}
+
+#layer-options-header #add-layer {
+  position: absolute;
+  font-size: large;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  margin-top: 6px;
+  margin-right: 5px;
+
+  color: white;
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 5px;
+
+  cursor: pointer;
+  transition: color 250ms, background-color 250ms;
+}
+
+#layer-options-header #add-layer:hover {
+  font-weight: 700;
+  color: black;
+  background-color: white;
+}
+
+/* Layer Items */
+#layers-options-container {
+  height: max-content;
+}
+
+.layers-options-container-item {
+  display: block;
+  width: 100%;
+  height: 60px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: black;
+
+  transition: background-color 250ms;
+}
+
+.layers-options-container-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.layers-options-container-item[selected] {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.layers-options-container-item span {
+  position: absolute;
+  margin-top: 17px;
+  left: 5px;
+}
+
+.layers-options-container-item div {
+  position: absolute;
+  left: 25px;
+  width: 125px;
+  height: 60px;
+}
+
+.layers-options-container-item button {
+  font-size: xx-large;
+  position: absolute;
+  right: 0;
+  width: 30px;
+  height: 60px;
+  padding-bottom: 6px;
+
+  color: white;
+  background-color: black;
+  border: none;
+
+  cursor: pointer;
+  transition: background-color 400ms;
+}
+
+.layers-options-container-item button:hover {
+  background-color: rgb(210, 15, 15);
+}

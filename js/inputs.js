@@ -1,3 +1,4 @@
+import { CURRENT_PICKS } from './globals';
 import { eraserSize } from './tools/eraser';
 import { event } from './tools';
 import { g } from './lib';
@@ -11,7 +12,7 @@ document.addEventListener('keydown', (e) => {
   if (!e.repeat) {
     switch (e.key) {
       case '+': {
-        if (g('canvas').getAttribute('tool') === 'eraser') {
+        if (CURRENT_PICKS.tool === 'eraser') {
           eraserSize.increase();
         }
 
@@ -19,7 +20,7 @@ document.addEventListener('keydown', (e) => {
       }
 
       case '-': {
-        if (g('canvas').getAttribute('tool') === 'eraser') {
+        if (CURRENT_PICKS.tool === 'eraser') {
           eraserSize.decrease();
         }
 
@@ -28,7 +29,7 @@ document.addEventListener('keydown', (e) => {
 
       case ' ': {
         if (prevAction !== 'move' && prevAction !== 'moving') {
-          prevAction = g('canvas').getAttribute('tool');
+          prevAction = CURRENT_PICKS.tool;
           g(`tool-move`).click();
         }
 

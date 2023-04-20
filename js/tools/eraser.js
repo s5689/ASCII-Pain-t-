@@ -86,7 +86,7 @@ g('tool-eraser').addEventListener('click', () => {
 
   // Funciones Internas
   function renderLayer(e) {
-    const layer = LAYER_MAP[`layer-${CURRENT_PICKS.layer}`];
+    const layer = LAYER_MAP.layerList[`layer-${CURRENT_PICKS.layer}`];
     const area = getArea(e);
 
     area.forEach(({ x, y }) => {
@@ -101,7 +101,7 @@ g('tool-eraser').addEventListener('click', () => {
   }
 
   function renderPrev(e) {
-    const layer = LAYER_MAP['preview-layer'];
+    const layer = LAYER_MAP.layerList['preview-layer'];
     const area = getArea(e);
 
     area.forEach(({ x, y }) => {
@@ -115,7 +115,7 @@ g('tool-eraser').addEventListener('click', () => {
   }
 
   function cleanPrev() {
-    const layer = LAYER_MAP['preview-layer'];
+    const layer = LAYER_MAP.layerList['preview-layer'];
     const area = getArea(prevPixel);
 
     area.forEach(({ x, y }) => {

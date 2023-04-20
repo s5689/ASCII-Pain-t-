@@ -35,6 +35,10 @@
   cursor: grab;
 }
 
+#canvas[tool='moving'] {
+  cursor: grabbing;
+}
+
 #canvas table:not(:first-child) {
   position: absolute;
   top: 0px;

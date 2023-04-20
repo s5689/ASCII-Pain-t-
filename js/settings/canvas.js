@@ -1,19 +1,83 @@
-import { CANVAS_SETTINGS, LAYER_MAP } from '.';
-import { g, q } from '../../lib';
+import buildToolEvents from '../tools';
+import { q } from '../lib';
 
-export function setEvents() {
-  // Conectar botones del HTML con el sistema
-  document.querySelector('#set-canvas-size button').addEventListener('click', () => {
-    const x = Number(document.querySelector('#set-canvas-size #x').value);
-    const y = Number(document.querySelector('#set-canvas-size #y').value);
+export const CANVAS_SETTINGS = {
+  /*
+    Size
 
-    CANVAS_SETTINGS.setSize(x, y);
-  });
+  */
+  _width: 0,
+  _height: 0,
+  sizeCallbacks: {},
 
-  g('add-layer').addEventListener('click', () => {
-    addLayer();
-  });
+  getSize() {
+    return { width: this._width, height: this._height };
+  },
 
+  setSize(x, y) {
+    Object.values(this.sizeCallbacks).forEach((value) => value(x, y));
+
+    this._width = x;
+    this._height = y;
+  },
+
+  onSizeChange(id, e) {
+    this.sizeCallbacks[id] = e;
+  },
+
+  offSizeChange(id) {
+    delete this.sizeCallbacks[id];
+  },
+};
+
+export const LAYER_MAP = {
+  /*
+    LayerList
+  
+  */
+  layerList: {},
+  callbacks: {},
+
+  getSize() {
+    return Object.keys(this.layerList).length - 1;
+  },
+
+  save(e) {
+    const name = e.offsetParent.id;
+    const foundYs = document.querySelectorAll(`#${name} tr`);
+
+    this.layerList[name] = [];
+
+    foundYs.forEach((value) => {
+      const temp = [];
+
+      for (let k = 0; k < value.children.length; k++) {
+        temp.push(value.children[k]);
+      }
+
+      this.layerList[name].push(temp);
+    });
+
+    // Conectar celdas del preview con las herramientas
+    if (name === 'preview-layer') buildToolEvents();
+    // Notificar cambios realizados sobre los layers a los eventos conectados
+    else Object.values(this.callbacks).forEach((value) => value(e));
+  },
+
+  remove(e) {
+    delete this.layerList[e];
+  },
+
+  onChange(id, e) {
+    this.callbacks[id] = e;
+  },
+
+  offChange(id) {
+    delete this.callbacks[id];
+  },
+};
+
+export function buildCanvas() {
   // Redimensionar todos los layers al cambiar el tamaño
   CANVAS_SETTINGS.onSizeChange('layers-resize', (newWidth, newHeight) => {
     const oldWidth = CANVAS_SETTINGS.getSize().width;
@@ -90,66 +154,6 @@ export function setEvents() {
           foundYs[k].children[target].remove();
         }
       }
-    }
-  });
-}
-
-export function addLayer() {
-  const { width, height } = CANVAS_SETTINGS.getSize();
-  const k = document.querySelectorAll('.layer').length;
-
-  let txt = `
-    <table 
-      id="layer-${k}" 
-      class="layer"
-      n="${k}" 
-      style="z-index: ${k * -1};"
-    ><tbody>`;
-
-  for (let y = 0; y < height; y++) {
-    txt += `<tr id="y${y}">`;
-
-    for (let x = 0; x < width; x++) {
-      txt += `<td id="p${x}-${y}" class="pixel"></td>`;
-    }
-
-    txt += '</tr>';
-  }
-
-  txt += '</tbody></table>';
-  g('canvas').innerHTML += txt;
-
-  // Triggerear almacenamiento de celdas en el mapa
-  CANVAS_SETTINGS.setSize(width, height);
-}
-
-export function removeLayer(e) {
-  let found = false;
-
-  // Buscar el numero del Layer a eliminar
-  q('table[n]', (a) => {
-    const n = Number(a.getAttribute('n'));
-
-    // Organizar despues de haber eliminado
-    if (found) {
-      const newIndex = n - 1;
-
-      // Reorganizar el mapa de pixeles
-      LAYER_MAP[`layer-${newIndex}`] = LAYER_MAP[a.id];
-      delete LAYER_MAP[a.id];
-
-      // Reorganizar el HTML
-      a.id = `layer-${newIndex}`;
-      a.setAttribute('n', newIndex);
-      a.style.zIndex = newIndex * -1;
-    }
-
-    // Eliminar al encontrar el elemento
-    if (n === e) {
-      LAYER_MAP.remove(a.id);
-
-      found = true;
-      a.remove();
     }
   });
 }

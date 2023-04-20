@@ -15,6 +15,7 @@ g('tool-move').addEventListener('click', () => {
   event.unbindAll();
 
   event.mousedown = () => {
+    CURRENT_PICKS.tool = 'moving';
     pressed = true;
   };
 
@@ -31,6 +32,7 @@ g('tool-move').addEventListener('click', () => {
   };
 
   event.mouseup = () => {
+    CURRENT_PICKS.tool = 'move';
     pressed = false;
   };
 });
