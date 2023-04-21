@@ -13,6 +13,10 @@
   cursor: default;
 }
 
+#canvas[invalid] {
+  cursor: not-allowed !important;
+}
+
 #canvas[tool='pencil'] {
   cursor: url('../assets/pencil.cur'), default;
 }

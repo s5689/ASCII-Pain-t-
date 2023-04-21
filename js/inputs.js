@@ -1,6 +1,6 @@
 import { CURRENT_PICKS } from './globals';
 import { eraserSize } from './tools/eraser';
-import { event } from './tools';
+import { event } from './tools/_index';
 import { g } from './lib';
 
 let prevAction = null;

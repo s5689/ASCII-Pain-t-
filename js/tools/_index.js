@@ -29,19 +29,19 @@ let init = false;
 export default function buildToolEvents() {
   // Eventos solo en el canvas
   q(`#preview-layer td`, (pixel) => {
-    pixel.addEventListener('mouseover', (e) => event.mouseover(getParams(e)));
-    pixel.addEventListener('mousedown', (e) => event.mousedown(getParams(e)));
-    pixel.addEventListener('click', (e) => event.click(getParams(e)));
-    pixel.addEventListener('contextmenu', (e) => event.contextmenu(getParams(e)));
+    setEvent({ element: pixel, e: 'mouseover', f: 'mouseover' });
+    setEvent({ element: pixel, e: 'mousedown', f: 'mousedown' });
+    setEvent({ element: pixel, e: 'click', f: 'click' });
+    setEvent({ element: pixel, e: 'contextmenu', f: 'contextmenu' });
   });
 
   // Eventos generales (Solo asignar una vez)
   if (!init) {
-    g('canvas').addEventListener('mouseleave', (e) => event.canvas_mouseleave(getParams(e)));
-    document.addEventListener('contextmenu', (e) => event.global_contextmenu(getParams(e)));
-    document.addEventListener('mousedown', (e) => event.global_mousedown(getParams(e)));
-    document.addEventListener('mousemove', (e) => event.global_mousemove(getParams(e)));
-    document.addEventListener('mouseup', (e) => event.mouseup(getParams(e)));
+    setEvent({ element: g('canvas'), e: 'mouseleave', f: 'canvas_mouseleave' });
+    setEvent({ element: document, e: 'contextmenu', f: 'global_contextmenu' });
+    setEvent({ element: document, e: 'mousedown', f: 'global_mousedown' });
+    setEvent({ element: document, e: 'mousemove', f: 'global_mousemove' });
+    setEvent({ element: document, e: 'mouseup', f: 'mouseup' });
 
     // Asignar atributo de la herramienta donde se requiera en el DOM.
     CURRENT_PICKS.onToolChange('tool-declaration', (e) => {
@@ -51,6 +51,16 @@ export default function buildToolEvents() {
 
     init = true;
   }
+}
+
+// Interfaz de asignacion de todos los eventos.
+// { Elemento, Evento, Funcion a ejecutar }
+function setEvent({ element, e, f }) {
+  element.addEventListener(e, (a) => {
+    if (CURRENT_PICKS.layer !== null) {
+      event[f](getParams(a));
+    }
+  });
 }
 
 function getParams(e) {

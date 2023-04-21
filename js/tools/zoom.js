@@ -1,5 +1,5 @@
 import { CURRENT_PICKS } from '../globals';
-import { event } from '.';
+import { event } from './_index';
 import { $, g } from '../lib';
 
 const css = $(':root');

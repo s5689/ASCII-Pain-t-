@@ -1,6 +1,6 @@
 import { CURRENT_PICKS } from '../globals';
 import { LAYER_MAP } from '../settings/canvas';
-import { event } from '.';
+import { event } from './_index';
 import { g } from '../lib';
 
 export const eraserSize = {

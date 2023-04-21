@@ -1,4 +1,4 @@
-import buildToolEvents from '../tools';
+import buildToolEvents from '../tools/_index';
 import { q } from '../lib';
 
 export const CANVAS_SETTINGS = {
@@ -43,7 +43,7 @@ export const LAYER_MAP = {
   },
 
   save(e) {
-    const name = e.offsetParent.id;
+    const name = e.parentElement.id;
     const foundYs = document.querySelectorAll(`#${name} tr`);
 
     this.layerList[name] = [];

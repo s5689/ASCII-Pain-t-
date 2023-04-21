@@ -45,8 +45,8 @@ export function $(q) {
 export function q(q, c) {
   const foundQuery = document.querySelectorAll(q);
 
-  foundQuery.forEach((value) => {
-    c(value);
+  foundQuery.forEach((value, k) => {
+    c(value, k);
   });
 }
 

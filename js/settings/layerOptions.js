@@ -1,6 +1,6 @@
 import { CANVAS_SETTINGS, LAYER_MAP } from './canvas';
 import { CURRENT_PICKS } from '../globals';
-import { g, $, q, c } from '../lib';
+import { g, $, q } from '../lib';
 
 export default function buildInterface() {
   const inputX = $('#set-canvas-size #x');
@@ -15,7 +15,7 @@ export default function buildInterface() {
     e.preventDefault();
   });
 
-  // Barra de transparencia
+  // Barra de transparencia: Aplicar cambios al layer actual
   const transparency = g('transparency');
   const tValue = g('transparency-value');
   transparency.addEventListener('mousedown', (e) => {
@@ -38,11 +38,12 @@ export default function buildInterface() {
     addLayer();
   });
 
-  // Actualizar Layers actuales en cada cambio sobre los mismos
+  // Crear y Actualizar Layers actuales en cada cambio sobre los mismos
   let containerHTML = '';
   LAYER_MAP.onChange('layers-options-container', (e) => {
-    const n = Number(e.offsetParent.getAttribute('n'));
+    const n = Number(e.parentElement.getAttribute('n'));
     const size = LAYER_MAP.getSize();
+    const canvasLayer = g(`layer-${n}`);
 
     // Limpiar texto HTML cada vez que se inicie el proceso.
     if (n === 0) containerHTML = '';
@@ -51,11 +52,15 @@ export default function buildInterface() {
     containerHTML += `
       <div class="layers-options-container-item" n="${n}"
         ${CURRENT_PICKS.layer === n ? 'selected' : ''}
+        ${canvasLayer.style.display === 'none' ? 'hide' : ''}
       >
         <span>${n + 1})</span>
         <div id="item-preview"></div>
-        ${n !== 0 ? `<button n="${n}">-</button>` : ''}
+        <button class="hide" n="${n}"></button>
+        ${n !== 0 ? `<button class="remove" n="${n}"></button>` : ''}
       </div>
+
+      <divider></divider>
     `;
 
     // Insertar en el HTML al haber recorrido todos los layers
@@ -63,23 +68,43 @@ export default function buildInterface() {
       g('layers-options-container').innerHTML = containerHTML;
 
       // Aplicar eventos a cada item
-      q('.layers-options-container-item', (e) => {
-        const button = e.children[2];
+      q('.layers-options-container-item', (e, k) => {
+        const hideBtn = e.children[2];
+        const removeBtn = e.children[3];
         const n = Number(e.getAttribute('n'));
 
+        // Boton mostrar / ocultar.
+        hideBtn.addEventListener('click', () => {
+          toggleLayer(n, e);
+        });
+
         // Boton eliminar.
-        if (typeof button !== 'undefined') {
-          button.addEventListener('click', () => {
+        if (k !== 0) {
+          removeBtn.addEventListener('click', () => {
             removeLayer(n);
           });
         }
 
         // Cambiar layer
-        e.addEventListener('click', (e) => {
-          // Solo aplicar si el click no fue en eliminar
-          if (e.target.localName !== 'button') {
-            CURRENT_PICKS.layer = n;
+        e.addEventListener('click', (a) => {
+          /*
+            RULES
+
+          */
+          let valid = true;
+
+          // El layer seleccionado no esta oculto
+          if (e.getAttribute('hide') !== null) {
+            valid = false;
           }
+
+          // El click no fue en eliminar u ocultar
+          if (a.target.localName === 'button') {
+            valid = false;
+          }
+
+          // Aplicar si todo es correcto
+          if (valid) CURRENT_PICKS.layer = n;
         });
       });
     }
@@ -104,9 +129,13 @@ export default function buildInterface() {
       transparency.removeAttribute('disabled');
       transparency.value = cssValue;
       tValue.innerHTML = `${cssValue}%`;
+
+      g('canvas').removeAttribute('invalid');
     }
-    // Si el nuevo layer es nulo, bloquear barra de transparencia.
+    // Si el nuevo layer es nulo, bloquear barra de transparencia & informar en el canvas.
     else {
+      g('canvas').setAttribute('invalid', '');
+
       transparency.setAttribute('disabled', '');
       tValue.innerHTML = '--%';
     }
@@ -183,4 +212,20 @@ function removeLayer(e) {
   });
 
   CANVAS_SETTINGS.setSize(width, height);
+}
+
+function toggleLayer(n, item) {
+  const state = item.getAttribute('hide');
+
+  if (state === null) {
+    g(`layer-${n}`).style.display = 'none';
+    item.setAttribute('hide', '');
+
+    if (n === CURRENT_PICKS.layer) {
+      CURRENT_PICKS.layer = null;
+    }
+  } else {
+    g(`layer-${n}`).style.display = 'block';
+    item.removeAttribute('hide');
+  }
 }
