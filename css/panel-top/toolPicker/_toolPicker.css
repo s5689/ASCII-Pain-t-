@@ -1,0 +1,27 @@
+@import 'pencil.css';
+@import 'eraser.css';
+@import 'zoom.css';
+@import 'move.css';
+
+#tool-picker {
+  position: absolute;
+  top: 10px;
+  left: 436px;
+  width: fit-content;
+}
+
+#tool-picker button {
+  width: 30px;
+  height: 30px;
+
+  filter: invert(1);
+  border: 0;
+  cursor: pointer;
+
+  transition: background-image 250ms, filter 250ms;
+}
+
+#tool-picker-top,
+#tool-picker-bottom {
+  height: 30px;
+}

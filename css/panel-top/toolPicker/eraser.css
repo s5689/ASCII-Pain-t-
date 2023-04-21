@@ -1,0 +1,12 @@
+#tool-eraser {
+  background: url('../../assets/eraser-btn.svg') no-repeat center center / contain;
+}
+
+#tool-picker:not([tool='eraser']) #tool-eraser:hover {
+  background: url('../../assets/eraser-btn2.svg') no-repeat center center / contain;
+  filter: invert(0.6);
+}
+
+#tool-picker[tool='eraser'] #tool-eraser {
+  background: url('../../assets/eraser-btn2.svg') no-repeat center center / contain;
+}

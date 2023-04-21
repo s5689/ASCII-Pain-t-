@@ -1,0 +1,82 @@
+#layer-options-header {
+  width: 100%;
+  height: 38px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#layer-options-header #transparency {
+  position: absolute;
+  top: 8px;
+  left: 5px;
+  width: 90px;
+  background-color: black;
+  border: 1px solid white;
+  padding: 1px;
+
+  transition: background-color 250ms;
+  -webkit-appearance: none;
+}
+
+#layer-options-header #transparency[disabled] {
+  cursor: not-allowed !important;
+}
+
+#layer-options-header #transparency:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#layer-options-header #transparency:active {
+  background-color: white;
+}
+
+#layer-options-header #transparency::-webkit-slider-thumb {
+  height: 15px;
+  width: 15px;
+  border: 1px solid #000;
+  background-color: white;
+
+  transition: background-color 250ms;
+  cursor: pointer;
+
+  -webkit-appearance: none;
+}
+
+#layer-options-header #transparency[disabled]::-webkit-slider-thumb {
+  background-color: rgba(0, 0, 0, 0) !important;
+  border: none !important;
+  cursor: not-allowed !important;
+}
+
+#layer-options-header #transparency:active::-webkit-slider-thumb {
+  background-color: black;
+}
+
+#layer-options-header #transparency-value {
+  position: absolute;
+  top: 8px;
+  left: 105px;
+}
+
+#layer-options-header #add-layer {
+  position: absolute;
+  font-size: large;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  margin-top: 6px;
+  margin-right: 5px;
+
+  color: white;
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 5px;
+
+  cursor: pointer;
+  transition: color 250ms, background-color 250ms;
+}
+
+#layer-options-header #add-layer:hover {
+  font-weight: 700;
+  color: black;
+  background-color: white;
+}

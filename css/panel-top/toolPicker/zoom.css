@@ -1,0 +1,13 @@
+#tool-zoom {
+  transform: scaleX(-1);
+  background: url('../../assets/zoom-btn.svg') no-repeat center center / 34px;
+}
+
+#tool-picker:not([tool='zoom']) #tool-zoom:hover {
+  background: url('../../assets/zoom-btn2.svg') no-repeat center center / 34px;
+  filter: invert(0.6);
+}
+
+#tool-picker[tool='zoom'] #tool-zoom {
+  background: url('../../assets/zoom-btn2.svg') no-repeat center center / 34px;
+}

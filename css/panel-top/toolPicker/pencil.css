@@ -1,0 +1,12 @@
+#tool-pencil {
+  background: url('../../assets/pencil-btn.svg') no-repeat center center / contain;
+}
+
+#tool-picker:not([tool='pencil']) #tool-pencil:hover {
+  background: url('../../assets/pencil-btn2.svg') no-repeat center center / contain;
+  filter: invert(0.6);
+}
+
+#tool-picker[tool='pencil'] #tool-pencil {
+  background: url('../../assets/pencil-btn2.svg') no-repeat center center / contain;
+}

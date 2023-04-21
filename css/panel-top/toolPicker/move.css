@@ -1,0 +1,13 @@
+#tool-move {
+  background: url('../../assets/move-btn.svg') no-repeat center -10px/ 42px;
+}
+
+#tool-picker:not([tool='move']):not([tool='moving']) #tool-move:hover {
+  background: url('../../assets/move-btn2.svg') no-repeat center -10px/ 42px;
+  filter: invert(0.6);
+}
+
+#tool-picker[tool='move'] #tool-move,
+#tool-picker[tool='moving'] #tool-move {
+  background: url('../../assets/move-btn2.svg') no-repeat center -10px/ 42px;
+}

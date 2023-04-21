@@ -1,0 +1,17 @@
+#history {
+  position: relative;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  height: 30%;
+  width: 180px;
+  border: 1px solid white;
+
+  overflow: scroll;
+  user-select: none;
+}
+
+#history::-webkit-scrollbar {
+  display: none;
+}

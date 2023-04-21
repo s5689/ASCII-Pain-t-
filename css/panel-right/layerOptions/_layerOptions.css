@@ -1,0 +1,19 @@
+@import 'header.css';
+@import 'items.css';
+
+#layer-options {
+  position: relative;
+  top: calc(32px + 1.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  height: calc(100% - (30% + 64px + 32px + 7.5rem));
+  width: 180px;
+
+  border: 1px solid white;
+  overflow: scroll;
+  user-select: none;
+}
+
+#layer-options::-webkit-scrollbar {
+  display: none;
+}

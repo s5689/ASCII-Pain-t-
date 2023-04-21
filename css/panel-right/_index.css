@@ -1,0 +1,16 @@
+@import 'history.css';
+@import 'canvasSize.css';
+@import 'layerOptions/_layerOptions.css';
+
+#panel-right {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  height: 100%;
+  width: 200px;
+
+  background-color: black;
+  border-left: 1px solid white;
+  user-select: none;
+  z-index: 9;
+}
