@@ -1,6 +1,6 @@
-import { CURRENT_PICKS } from '../globals';
-import { event } from './_index';
-import { c, g } from '../lib';
+import { CURRENT_PICKS } from '../../../globals';
+import { event } from './_toolPicker';
+import { c, g } from '../../../lib';
 
 const canvas = g('canvas');
 const canvasCss = c('canvas');

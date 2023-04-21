@@ -1,83 +1,7 @@
-import buildToolEvents from '../tools/_index';
-import { q } from '../lib';
+import { CANVAS_SETTINGS, CURRENT_PICKS, LAYER_MAP } from '../globals';
+import { g, q } from '../lib';
 
-export const CANVAS_SETTINGS = {
-  /*
-    Size
-
-  */
-  _width: 0,
-  _height: 0,
-  sizeCallbacks: {},
-
-  getSize() {
-    return { width: this._width, height: this._height };
-  },
-
-  setSize(x, y) {
-    Object.values(this.sizeCallbacks).forEach((value) => value(x, y));
-
-    this._width = x;
-    this._height = y;
-  },
-
-  onSizeChange(id, e) {
-    this.sizeCallbacks[id] = e;
-  },
-
-  offSizeChange(id) {
-    delete this.sizeCallbacks[id];
-  },
-};
-
-export const LAYER_MAP = {
-  /*
-    LayerList
-  
-  */
-  layerList: {},
-  callbacks: {},
-
-  getSize() {
-    return Object.keys(this.layerList).length - 1;
-  },
-
-  save(e) {
-    const name = e.parentElement.id;
-    const foundYs = document.querySelectorAll(`#${name} tr`);
-
-    this.layerList[name] = [];
-
-    foundYs.forEach((value) => {
-      const temp = [];
-
-      for (let k = 0; k < value.children.length; k++) {
-        temp.push(value.children[k]);
-      }
-
-      this.layerList[name].push(temp);
-    });
-
-    // Conectar celdas del preview con las herramientas
-    if (name === 'preview-layer') buildToolEvents();
-    // Notificar cambios realizados sobre los layers a los eventos conectados
-    else Object.values(this.callbacks).forEach((value) => value(e));
-  },
-
-  remove(e) {
-    delete this.layerList[e];
-  },
-
-  onChange(id, e) {
-    this.callbacks[id] = e;
-  },
-
-  offChange(id) {
-    delete this.callbacks[id];
-  },
-};
-
-export function buildCanvas() {
+export default function canvas() {
   // Redimensionar todos los layers al cambiar el tamaño
   CANVAS_SETTINGS.onSizeChange('layers-resize', (newWidth, newHeight) => {
     const oldWidth = CANVAS_SETTINGS.getSize().width;
@@ -154,6 +78,15 @@ export function buildCanvas() {
           foundYs[k].children[target].remove();
         }
       }
+    }
+  });
+
+  // Cursor <No Permitido> al seleccionar un layer nulo.
+  CURRENT_PICKS.onLayerChange('canvas', (e) => {
+    if (e === null) {
+      g('canvas').setAttribute('invalid', '');
+    } else {
+      g('canvas').removeAttribute('invalid');
     }
   });
 }

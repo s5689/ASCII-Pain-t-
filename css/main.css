@@ -1,6 +1,6 @@
-@import 'panel-left/_index.css';
-@import 'panel-top/_index.css';
-@import 'panel-right/_index.css';
+@import 'panel-left/_panel-left.css';
+@import 'panel-top/_panel-top.css';
+@import 'panel-right/_panel-right.css';
 @import 'canvas.css';
 
 @font-face {

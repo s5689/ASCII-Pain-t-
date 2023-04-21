@@ -1,13 +1,12 @@
 import { CURRENT_PICKS } from './globals';
-import { eraserSize } from './tools/eraser';
-import { event } from './tools/_index';
+import { eraserSize } from './app/panel-top/toolPicker/eraser';
+import { event } from './app/panel-top/toolPicker/_toolPicker';
 import { g } from './lib';
 
 let prevAction = null;
 
-// Teclado
 document.addEventListener('keydown', (e) => {
-  // console.log(e);
+  // console.log(e.key);
 
   if (!e.repeat) {
     switch (e.key) {
@@ -47,6 +46,8 @@ document.addEventListener('keyup', (e) => {
       } else {
         g('canvas').removeAttribute('tool');
         g('tool-picker').removeAttribute('tool');
+
+        CURRENT_PICKS.tool = null;
         event.unbindAll();
       }
 

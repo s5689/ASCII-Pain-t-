@@ -1,6 +1,6 @@
-import { CURRENT_PICKS } from '../globals';
-import { event } from './_index';
-import { g } from '../lib';
+import { CURRENT_PICKS } from '../../../globals';
+import { event } from './_toolPicker';
+import { g } from '../../../lib';
 
 g('tool-pencil').addEventListener('click', () => {
   let prevPixel = { style: { color: '', background: '' } };
@@ -14,6 +14,7 @@ g('tool-pencil').addEventListener('click', () => {
 
   event.mousedown = ({ target }) => {
     pressed = true;
+    cleanPrev();
     renderLayer(target);
   };
 
@@ -31,8 +32,13 @@ g('tool-pencil').addEventListener('click', () => {
     }
   };
 
-  event.mouseup = () => {
+  event.mouseup = ({ preview }) => {
     pressed = false;
+
+    if (preview !== null) {
+      renderPrev(preview);
+      prevPixel = preview;
+    }
   };
 
   event.canvas_mouseleave = () => {

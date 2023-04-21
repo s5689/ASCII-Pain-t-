@@ -1,7 +1,7 @@
-import { COLORS, CURRENT_PICKS } from '../globals';
-import { g } from '../lib';
+import { COLORS, CURRENT_PICKS } from '../../globals';
+import { g } from '../../lib';
 
-export default function charPreview() {
+export default function buildCharPreview() {
   CURRENT_PICKS.onCharChange('charPreview', (e) => {
     g('char-preview').innerHTML = e;
   });

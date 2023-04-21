@@ -1,5 +1,5 @@
-import { CURRENT_PICKS } from '../globals';
-import { $, g, q } from '../lib';
+import { CURRENT_PICKS, LAYER_MAP } from '../../../globals';
+import { $, g, q } from '../../../lib';
 import './pencil';
 import './eraser';
 import './zoom';
@@ -25,8 +25,16 @@ export const event = {
   },
 };
 
+export default function buildToolPicker() {
+  LAYER_MAP.onChange('tool-picker', (e) => {
+    if (e.parentElement.id === 'preview-layer') {
+      setToolEvents();
+    }
+  });
+}
+
 let init = false;
-export default function buildToolEvents() {
+function setToolEvents() {
   // Eventos solo en el canvas
   q(`#preview-layer td`, (pixel) => {
     setEvent({ element: pixel, e: 'mouseover', f: 'mouseover' });

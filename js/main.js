@@ -1,22 +1,24 @@
-import { COLORS, CURRENT_PICKS } from './globals';
-import { buildCanvas, CANVAS_SETTINGS } from './settings/canvas';
-import buildInterface, { addLayer } from './settings/layerOptions';
-import buildColorPicker from './settings/colorPicker';
-import buildCharPicker from './settings/charPicker';
-import charPreview from './misc/charPreview';
+import { CANVAS_SETTINGS, COLORS, CURRENT_PICKS } from './globals';
+import panelLeft from './app/panel-left/_panel-left';
+import panelTop from './app/panel-top/_panel-top';
+import panelRight from './app/panel-right/_panel-right';
+import canvas from './app/canvas';
 import './inputs';
 
 document.fonts.ready.then(() => {
-  buildCanvas();
-  buildInterface();
-  buildColorPicker();
-  buildCharPicker();
-  charPreview();
-  addLayer();
+  panelLeft();
+  panelTop();
+  panelRight();
+  canvas();
 
+  initVars();
+});
+
+function initVars() {
   CURRENT_PICKS.char = '';
   CURRENT_PICKS.color = COLORS[15];
   CURRENT_PICKS.background = COLORS[16];
   CURRENT_PICKS.layer = 0;
+
   CANVAS_SETTINGS.setSize(80, 25);
-});
+}

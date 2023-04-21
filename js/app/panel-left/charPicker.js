@@ -1,5 +1,5 @@
-import { COLORS, CURRENT_PICKS } from '../globals';
-import { g, q } from '../lib';
+import { COLORS, CURRENT_PICKS } from '../../globals';
+import { g, q } from '../../lib';
 
 const chars = [
   {
@@ -239,6 +239,7 @@ function generateTable(e) {
   txt += '</tbody></table>';
   g('char-picker').innerHTML = txt;
 
+  // Conectar eventos a la tabla generada
   setEvents();
 }
 

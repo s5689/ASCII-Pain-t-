@@ -1,6 +1,6 @@
-import { CURRENT_PICKS } from '../globals';
-import { event } from './_index';
-import { $, g } from '../lib';
+import { CURRENT_PICKS } from '../../../globals';
+import { event } from './_toolPicker';
+import { $, g } from '../../../lib';
 
 const css = $(':root');
 const cssVar = getComputedStyle(css);
