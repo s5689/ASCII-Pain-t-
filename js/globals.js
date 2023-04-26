@@ -160,6 +160,10 @@ export const CANVAS_SETTINGS = {
     this._height = y;
   },
 
+  applyChanges() {
+    this.setSize(this._width, this._height);
+  },
+
   onSizeChange(id, e) {
     this.sizeCallbacks[id] = e;
   },

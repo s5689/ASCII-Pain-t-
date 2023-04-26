@@ -12,6 +12,12 @@ document.fonts.ready.then(() => {
   canvas();
 
   initVars();
+
+  /*
+  document.getElementById('test').addEventListener('click', () => {
+    CANVAS_SETTINGS.applyChanges();
+  });
+  */
 });
 
 function initVars() {

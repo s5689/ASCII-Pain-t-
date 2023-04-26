@@ -82,11 +82,11 @@ export default function canvas() {
   });
 
   // Cursor <No Permitido> al seleccionar un layer nulo.
-  CURRENT_PICKS.onLayerChange('canvas', (e) => {
+  CURRENT_PICKS.onLayerChange('preview-layer', (e) => {
     if (e === null) {
-      g('canvas').setAttribute('invalid', '');
+      g('preview-layer').setAttribute('invalid', '');
     } else {
-      g('canvas').removeAttribute('invalid');
+      g('preview-layer').removeAttribute('invalid');
     }
   });
 }

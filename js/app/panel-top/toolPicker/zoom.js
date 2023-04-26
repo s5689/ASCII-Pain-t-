@@ -1,9 +1,9 @@
 import { CURRENT_PICKS } from '../../../globals';
 import { event } from './_toolPicker';
-import { $, g } from '../../../lib';
+import { $, c, g } from '../../../lib';
 
 const css = $(':root');
-const cssVar = getComputedStyle(css);
+const cssVar = c(css);
 
 g('tool-zoom').addEventListener('click', () => {
   // Declarar Herramienta

@@ -1,6 +1,6 @@
 import { CURRENT_PICKS } from '../../../globals';
 import { event } from './_toolPicker';
-import { g } from '../../../lib';
+import { c, g } from '../../../lib';
 
 g('tool-pencil').addEventListener('click', () => {
   let prevPixel = { style: { color: '', background: '' } };
@@ -60,11 +60,13 @@ g('tool-pencil').addEventListener('click', () => {
     e.innerHTML = CURRENT_PICKS.char;
     e.style.color = CURRENT_PICKS.color;
     e.style.background = CURRENT_PICKS.background;
+    e.style.opacity = c(`layer-${CURRENT_PICKS.layer}`).opacity;
   }
 
   function cleanPrev() {
     prevPixel.innerHTML = '';
     prevPixel.style.color = '';
     prevPixel.style.background = '';
+    prevPixel.style.opacity = 1;
   }
 });

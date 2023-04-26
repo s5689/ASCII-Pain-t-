@@ -38,7 +38,7 @@ export function $(q) {
  * `c`: Callback o funcion a ejecutar en los resultados de dicho query.
  *
  * ---------------------------------
- * Es un selector al estilo jQuery.
+ * Es un querySelectorAll junto a un forEach Resumido.
  *
  * La funcion dentro del callback sera ejecutada en todos los elementos encontrados en el selector.
  */
@@ -55,7 +55,9 @@ export function q(q, c) {
  * Acepta un argumento como parametro.
  *
  * -------------------
- * `e`: ID a seleccionar.
+ * `e`: ID o elemento a seleccionar
+ *
+ * (Acepta un `String` o un `HTML Element`).
  *
  * -------------------
  * Retorna la lista de propiedades CSS adheridas al elemento. Incluye aquellas definidas por las clases.
@@ -63,5 +65,9 @@ export function q(q, c) {
  * (El valor retornado es solo lectura).
  */
 export function c(e) {
-  return getComputedStyle(g(e));
+  if (typeof e === 'string') {
+    return getComputedStyle(g(e));
+  }
+
+  return getComputedStyle(e);
 }

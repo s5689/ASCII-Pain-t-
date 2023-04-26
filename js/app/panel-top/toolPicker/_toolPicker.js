@@ -1,4 +1,4 @@
-import { CURRENT_PICKS, LAYER_MAP } from '../../../globals';
+import { CANVAS_SETTINGS, CURRENT_PICKS, LAYER_MAP } from '../../../globals';
 import { $, g, q } from '../../../lib';
 import './pencil';
 import './eraser';
@@ -26,9 +26,22 @@ export const event = {
 };
 
 export default function buildToolPicker() {
+  let oldSize = { x: null, y: null };
+  let newSize = { x: null, y: null };
+
+  // Almacenar tamaño del canvas al aplicar cambios sobre el mismo
+  CANVAS_SETTINGS.onSizeChange('tool-picker', (x, y) => {
+    newSize = { x, y };
+  });
+
   LAYER_MAP.onChange('tool-picker', (e) => {
+    // Si el layer reescrito es el preview, y
     if (e.parentElement.id === 'preview-layer') {
-      setToolEvents();
+      // Si el tamaño del canvas cambio en alguna forma, aplicar eventos.
+      if (newSize.x !== oldSize.x || newSize.y !== oldSize.y) {
+        oldSize = newSize;
+        setToolEvents();
+      }
     }
   });
 }
@@ -53,7 +66,7 @@ function setToolEvents() {
 
     // Asignar atributo de la herramienta donde se requiera en el DOM.
     CURRENT_PICKS.onToolChange('tool-declaration', (e) => {
-      g('canvas').setAttribute('tool', e);
+      g('preview-layer').setAttribute('tool', e);
       g('tool-picker').setAttribute('tool', e);
     });
 
