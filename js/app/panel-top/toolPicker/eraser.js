@@ -1,4 +1,4 @@
-import { CURRENT_PICKS, LAYER_MAP } from '../../../globals';
+import { COLORS, CURRENT_PICKS, LAYER_MAP } from '../../../globals';
 import { event } from './_toolPicker';
 import { g } from '../../../lib';
 
@@ -92,8 +92,7 @@ g('tool-eraser').addEventListener('click', () => {
       if (typeof layer[y] !== 'undefined') {
         if (typeof layer[y][x] !== 'undefined') {
           layer[y][x].innerHTML = '';
-          layer[y][x].style.color = '';
-          layer[y][x].style.background = '';
+          layer[y][x].removeAttribute('style');
         }
       }
     });

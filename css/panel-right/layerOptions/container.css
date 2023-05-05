@@ -59,6 +59,13 @@ divider[target] {
   height: 60px;
 }
 
+.layers-options-container-item canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .layers-options-container-item button {
   position: absolute;
   right: 0;

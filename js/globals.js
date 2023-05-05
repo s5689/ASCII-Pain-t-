@@ -15,7 +15,7 @@ export const COLORS = [
   'rgba(255, 0, 255, 1)',
   'rgba(255, 255, 0, 1)',
   'rgba(255, 255, 255, 1)',
-  'rgba(0 ,0 ,0 ,0)',
+  'rgba(0, 0, 0, 0)',
 ];
 
 export const CURRENT_PICKS = {
@@ -147,13 +147,19 @@ export const CANVAS_SETTINGS = {
   */
   _width: 0,
   _height: 0,
+  forcedCurrent: {}, // Forzar la visualizacion del valor del cambio actual
   sizeCallbacks: {},
 
   getSize() {
     return { width: this._width, height: this._height };
   },
 
+  getForcedCurrent() {
+    return this.forcedCurrent;
+  },
+
   setSize(x, y) {
+    this.forcedCurrent = { width: x, height: y };
     Object.values(this.sizeCallbacks).forEach((value) => value(x, y));
 
     this._width = x;

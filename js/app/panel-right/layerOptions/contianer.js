@@ -1,4 +1,4 @@
-import { CANVAS_SETTINGS, CURRENT_PICKS, LAYER_MAP } from '../../../globals';
+import { CANVAS_SETTINGS, COLORS, CURRENT_PICKS, LAYER_MAP } from '../../../globals';
 import { $, c, g, q } from '../../../lib';
 
 // Eventos dinamicos compartidos entre los diferentes layers
@@ -60,9 +60,12 @@ export default function buildContainer() {
     }
   });
 
-  // Escuchar mouse al mover los layers.
+  // Escuchar mouse al mover los layers & al ser necesario actualizar el preview.
   document.addEventListener('mousemove', (e) => onmousemove(e));
-  document.addEventListener('mouseup', (e) => onmouseup(e));
+  document.addEventListener('mouseup', (e) => {
+    onmouseup(e);
+    itemPreview(e);
+  });
 }
 
 function setEvents() {
@@ -71,6 +74,9 @@ function setEvents() {
     const hideBtn = e.children[2];
     const removeBtn = e.children[3];
     const n = Number(e.getAttribute('n'));
+
+    // Preparar preview del layer
+    itemPreview(n, e);
 
     // Boton mostrar / ocultar.
     hideBtn.addEventListener('click', () => {
@@ -93,6 +99,79 @@ function setEvents() {
     // Mover Layer
     moveLayer(n, e);
   });
+}
+
+function itemPreview(e, item) {
+  const canvasX = CANVAS_SETTINGS.getForcedCurrent().width;
+  const canvasY = CANVAS_SETTINGS.getForcedCurrent().height;
+
+  // Si el item existe, preparar preview
+  if (typeof item !== 'undefined') {
+    const canvas = document.createElement('canvas');
+    let setX = canvasX;
+    let setY = canvasY;
+    let scale = 0;
+
+    // Calcular escala de pixeles a usar
+    while (true) {
+      const calcX = 125 / (scale + 1);
+      const calcY = 60 / (scale + 1);
+
+      if (calcX < canvasX || calcY < canvasY) break;
+
+      scale++;
+    }
+
+    // Generar Canvas
+    if (scale !== 0) {
+      canvas.setAttribute('width', setX * scale);
+      canvas.setAttribute('height', setY * scale);
+      canvas.setAttribute('scale', scale);
+
+      item.children[1].replaceChildren(canvas);
+    }
+
+    // Renderizar el preview
+    render(e);
+  }
+  // De lo contrario, dibujar el preview del layer que corresponda.
+  else {
+    if (e.target.offsetParent !== null) {
+      if (e.target.offsetParent.id === 'preview-layer') {
+        render(CURRENT_PICKS.layer);
+      }
+    }
+  }
+
+  function render(n) {
+    const canvas = $(`.layers-options-container-item[n="${n}"] canvas`);
+    const scale = Number(canvas.getAttribute('scale'));
+    const ctx = canvas.getContext('2d');
+
+    // Limpiar canvas en cada renderizado
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Recorrer todo el layer
+    LAYER_MAP.layerList[`layer-${n}`].forEach((y, posY) => {
+      y.forEach((x, posX) => {
+        const { color, backgroundColor } = c(x);
+        const content = x.innerHTML;
+        let fill;
+
+        // Si el pixel contiene un caracter y no es transparente, usar el color del caracter
+        if (content !== '' && content !== ' ' && color !== COLORS[16]) {
+          fill = color;
+        }
+        // De lo contrario, usar el color del background
+        else {
+          fill = backgroundColor;
+        }
+
+        ctx.fillStyle = fill;
+        ctx.fillRect(posX * scale, posY * scale, scale, scale);
+      });
+    });
+  }
 }
 
 function toggleLayer(n, item) {
@@ -250,13 +329,15 @@ function moveLayer(n, item) {
     // Si se realizo un cambio en el orden, reorganizar
     if (moveTo !== null && moveTo !== n) {
       const nodeList = document.querySelectorAll('table[n]');
+      let newPick = CURRENT_PICKS.layer;
 
       nodeList.forEach((e) => {
         const k = Number(e.getAttribute('n'));
 
         // Si se intenta bajar el layer
         if (moveTo - n > 0) {
-          // Si la posicion del elemento actual del foreach es mayor que la del elemento seleccionado && no sobrepasa la posicion donde se movera
+          // Si la posicion del elemento actual del foreach es mayor que la del elemento
+          // seleccionado && no sobrepasa la posicion donde se movera
           // (para evitar mover layers que deberian quedarse iguales)
           if (k > n && k <= moveTo) {
             const newIndex = k - 1;
@@ -266,6 +347,9 @@ function moveLayer(n, item) {
             e.style.zIndex = newIndex * -1;
 
             e.parentNode.insertBefore(e, nodeList[k]);
+
+            // Mantener la seleccion del layer aun despues de haberle movido
+            if (CURRENT_PICKS.layer === k) newPick = newIndex;
           }
 
           // Si es el elemento a mover
@@ -275,12 +359,16 @@ function moveLayer(n, item) {
             e.style.zIndex = moveTo * -1;
 
             e.parentNode.insertBefore(e, nodeList[moveTo + 1]);
+
+            // Seleccionar el layer movido en su nueva posicion
+            if (CURRENT_PICKS.layer === k) newPick = moveTo;
           }
         }
 
         // Si se intenta subir el layer
         if (moveTo - n < 0) {
-          // Si la posicion del elemento actual del foreach es menor que la del elemento seleccionado && no sobrepasa la posicion donde se movera
+          // Si la posicion del elemento actual del foreach es menor que la del elemento
+          // seleccionado && no sobrepasa la posicion donde se movera
           // (para evitar mover layers que deberian quedarse iguales)
           if (k < n && k >= moveTo) {
             const newIndex = k + 1;
@@ -291,6 +379,9 @@ function moveLayer(n, item) {
             e.style.zIndex = newIndex * -1;
 
             e.parentNode.insertBefore(e, nodeList[newIndex]);
+
+            // Mantener la seleccion del layer aun despues de haberle movido
+            if (CURRENT_PICKS.layer === k) newPick = newIndex;
           }
 
           // Si es el elemento a mover
@@ -301,10 +392,14 @@ function moveLayer(n, item) {
             e.style.zIndex = moveTo * -1;
 
             e.parentNode.insertBefore(e, nodeList[moveTo]);
+
+            // Seleccionar el layer movido en su nueva posicion
+            if (CURRENT_PICKS.layer === k) newPick = moveTo;
           }
         }
       });
 
+      CURRENT_PICKS.layer = newPick;
       CANVAS_SETTINGS.applyChanges();
     }
   }
