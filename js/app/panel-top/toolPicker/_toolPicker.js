@@ -30,8 +30,8 @@ export default function buildToolPicker() {
   let newSize = { x: null, y: null };
 
   // Almacenar tamaño del canvas al aplicar cambios sobre el mismo
-  CANVAS_SETTINGS.onSizeChange('tool-picker', (x, y) => {
-    newSize = { x, y };
+  CANVAS_SETTINGS.onSizeChange('tool-picker', (e) => {
+    newSize = e;
   });
 
   LAYER_MAP.onChange('tool-picker', (e) => {

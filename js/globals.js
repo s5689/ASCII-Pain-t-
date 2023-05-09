@@ -145,29 +145,23 @@ export const CANVAS_SETTINGS = {
     Size
 
   */
-  _width: 0,
-  _height: 0,
-  forcedCurrent: {}, // Forzar la visualizacion del valor del cambio actual
+  _prevSize: { x: 0, y: 0 },
+  _size: { x: 0, y: 0 },
   sizeCallbacks: {},
 
-  getSize() {
-    return { width: this._width, height: this._height };
-  },
-
-  getForcedCurrent() {
-    return this.forcedCurrent;
+  get size() {
+    return this._size;
   },
 
   setSize(x, y) {
-    this.forcedCurrent = { width: x, height: y };
-    Object.values(this.sizeCallbacks).forEach((value) => value(x, y));
+    this._prevSize = this._size;
+    this._size = { x, y };
 
-    this._width = x;
-    this._height = y;
+    Object.values(this.sizeCallbacks).forEach((value) => value(this._size, this._prevSize));
   },
 
   applyChanges() {
-    this.setSize(this._width, this._height);
+    this.setSize(this._size.x, this._size.y);
   },
 
   onSizeChange(id, e) {

@@ -15,8 +15,8 @@ export default function buildCanvasSize() {
   });
 
   // Sincronizar cambios del tamaño del canvas en los inputs X, Y
-  CANVAS_SETTINGS.onSizeChange('set-canvas-size', (x, y) => {
-    inputX.value = x;
-    inputY.value = y;
+  CANVAS_SETTINGS.onSizeChange('set-canvas-size', (e) => {
+    inputX.value = e.x;
+    inputY.value = e.y;
   });
 }

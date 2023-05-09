@@ -116,8 +116,8 @@ function setEvents() {
 }
 
 function itemPreview(e, item) {
-  const canvasX = CANVAS_SETTINGS.getForcedCurrent().width;
-  const canvasY = CANVAS_SETTINGS.getForcedCurrent().height;
+  const canvasX = CANVAS_SETTINGS.size.x;
+  const canvasY = CANVAS_SETTINGS.size.y;
 
   // Si el item existe, preparar preview
   if (typeof item !== 'undefined') {

@@ -63,8 +63,9 @@
   right: 0;
   width: 26px;
   height: 26px;
-  margin-top: 6px;
+  margin-top: 7px;
   margin-right: 5px;
+  padding-top: 2px;
 
   color: white;
   background-color: black;

@@ -3,14 +3,11 @@ import { g, q } from '../lib';
 
 export default function canvas() {
   // Redimensionar todos los layers al cambiar el tamaño
-  CANVAS_SETTINGS.onSizeChange('layers-resize', (newWidth, newHeight) => {
-    const oldWidth = CANVAS_SETTINGS.getSize().width;
-    const oldHeight = CANVAS_SETTINGS.getSize().height;
-
+  CANVAS_SETTINGS.onSizeChange('layers-resize', (newSize, oldSize) => {
     // Aplicar cambios a cada layer
     q('#canvas table tbody', (e) => {
-      const widthDiff = newWidth - oldWidth;
-      const heightDiff = newHeight - oldHeight;
+      const widthDiff = newSize.x - oldSize.x;
+      const heightDiff = newSize.y - oldSize.y;
 
       let widthAction = () => null;
       let heightAction = () => null;
@@ -35,7 +32,7 @@ export default function canvas() {
       for (let k = 0; k < n; k++) {
         let txt = `<tr id="y${k + size}">`;
 
-        for (let j = 0; j < oldWidth; j++) {
+        for (let j = 0; j < oldSize.x; j++) {
           txt += `<td id="p${j}-${k + size}" class="pixel"></td>`;
         }
 

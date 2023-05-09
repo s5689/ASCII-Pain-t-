@@ -54,7 +54,8 @@ export default function buildHeader() {
 }
 
 function addLayer() {
-  const { width, height } = CANVAS_SETTINGS.getSize();
+  const width = CANVAS_SETTINGS.size.x;
+  const height = CANVAS_SETTINGS.size.y;
   const k = document.querySelectorAll('.layer').length;
 
   const table = document.createElement('table');
