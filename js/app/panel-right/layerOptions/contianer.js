@@ -62,9 +62,23 @@ export default function buildContainer() {
 
   // Escuchar mouse al mover los layers & al ser necesario actualizar el preview.
   document.addEventListener('mousemove', (e) => onmousemove(e));
+
+  let onCanvas;
+  document.addEventListener('mousedown', (e) => {
+    if (e.target.offsetParent !== null) {
+      if (e.target.offsetParent.id === 'preview-layer') {
+        onCanvas = true;
+      }
+    }
+  });
+
   document.addEventListener('mouseup', (e) => {
     onmouseup(e);
-    itemPreview(e);
+
+    if (onCanvas) {
+      itemPreview(e);
+      onCanvas = false;
+    }
   });
 }
 
@@ -136,10 +150,8 @@ function itemPreview(e, item) {
   }
   // De lo contrario, dibujar el preview del layer que corresponda.
   else {
-    if (e.target.offsetParent !== null) {
-      if (e.target.offsetParent.id === 'preview-layer') {
-        render(CURRENT_PICKS.layer);
-      }
+    if (CURRENT_PICKS.layer !== null) {
+      render(CURRENT_PICKS.layer);
     }
   }
 
@@ -336,8 +348,7 @@ function moveLayer(n, item) {
 
         // Si se intenta bajar el layer
         if (moveTo - n > 0) {
-          // Si la posicion del elemento actual del foreach es mayor que la del elemento
-          // seleccionado && no sobrepasa la posicion donde se movera
+          // Si la posicion del elemento actual del foreach es mayor que la del elemento seleccionado && no sobrepasa la posicion donde se movera
           // (para evitar mover layers que deberian quedarse iguales)
           if (k > n && k <= moveTo) {
             const newIndex = k - 1;
@@ -367,8 +378,7 @@ function moveLayer(n, item) {
 
         // Si se intenta subir el layer
         if (moveTo - n < 0) {
-          // Si la posicion del elemento actual del foreach es menor que la del elemento
-          // seleccionado && no sobrepasa la posicion donde se movera
+          // Si la posicion del elemento actual del foreach es menor que la del elemento seleccionado && no sobrepasa la posicion donde se movera
           // (para evitar mover layers que deberian quedarse iguales)
           if (k < n && k >= moveTo) {
             const newIndex = k + 1;
