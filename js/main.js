@@ -14,6 +14,8 @@ document.fonts.ready.then(() => {
   initVars();
 
   /*
+  document.getElementById('tool-fill').click();
+  
   document.getElementById('test').addEventListener('click', () => {
     CANVAS_SETTINGS.applyChanges();
   });

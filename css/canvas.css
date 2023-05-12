@@ -47,6 +47,10 @@
   box-shadow: 0 0 0 1px white;
 }
 
+#preview-layer[tool='fill'] {
+  cursor: url('../assets/fill.cur') 1 15, default;
+}
+
 #preview-layer[tool='zoom'] {
   cursor: zoom-in;
 }

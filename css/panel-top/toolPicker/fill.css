@@ -1,0 +1,13 @@
+#tool-fill {
+  transform: scaleX(-1);
+  background: url('../../assets/fill-btn.svg') no-repeat center center / contain;
+}
+
+#tool-picker:not([tool='fill']) #tool-fill:hover {
+  background: url('../../assets/fill-btn2.svg') no-repeat center center / contain;
+  filter: invert(0.6);
+}
+
+#tool-picker[tool='fill'] #tool-fill {
+  background: url('../../assets/fill-btn2.svg') no-repeat center center / contain;
+}

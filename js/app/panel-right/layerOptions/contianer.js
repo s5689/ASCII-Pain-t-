@@ -348,7 +348,8 @@ function moveLayer(n, item) {
 
         // Si se intenta bajar el layer
         if (moveTo - n > 0) {
-          // Si la posicion del elemento actual del foreach es mayor que la del elemento seleccionado && no sobrepasa la posicion donde se movera
+          // Si la posicion del elemento actual del foreach es mayor que la del elemento seleccionado && no sobrepasa la posicion
+          // donde se movera.
           // (para evitar mover layers que deberian quedarse iguales)
           if (k > n && k <= moveTo) {
             const newIndex = k - 1;
@@ -378,7 +379,8 @@ function moveLayer(n, item) {
 
         // Si se intenta subir el layer
         if (moveTo - n < 0) {
-          // Si la posicion del elemento actual del foreach es menor que la del elemento seleccionado && no sobrepasa la posicion donde se movera
+          // Si la posicion del elemento actual del foreach es menor que la del elemento seleccionado && no sobrepasa la posicion
+          // donde se movera.
           // (para evitar mover layers que deberian quedarse iguales)
           if (k < n && k >= moveTo) {
             const newIndex = k + 1;

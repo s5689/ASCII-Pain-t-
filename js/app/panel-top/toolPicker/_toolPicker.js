@@ -2,6 +2,7 @@ import { CANVAS_SETTINGS, CURRENT_PICKS, LAYER_MAP } from '../../../globals';
 import { $, g, q } from '../../../lib';
 import './pencil';
 import './eraser';
+import './fill';
 import './zoom';
 import './move';
 

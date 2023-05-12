@@ -3,7 +3,7 @@ import { event } from './_toolPicker';
 import { c, g } from '../../../lib';
 
 g('tool-pencil').addEventListener('click', () => {
-  let prevPixel = { style: { color: '', background: '' } };
+  let prevPixel = { removeAttribute: () => null };
   let pressed = false;
 
   // Declarar Herramienta
@@ -65,8 +65,6 @@ g('tool-pencil').addEventListener('click', () => {
 
   function cleanPrev() {
     prevPixel.innerHTML = '';
-    prevPixel.style.color = '';
-    prevPixel.style.background = '';
-    prevPixel.style.opacity = 1;
+    prevPixel.removeAttribute('style');
   }
 });
