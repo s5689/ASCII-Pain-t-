@@ -3,7 +3,6 @@ import { $, g, q } from '../../../lib';
 import './pencil';
 import './eraser';
 import './fill';
-import './select';
 import './zoom';
 import './move';
 

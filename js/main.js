@@ -13,9 +13,10 @@ document.fonts.ready.then(() => {
 
   initVars();
 
-  document.getElementById('tool-select').click();
+  document.getElementById('tool-pencil').click();
+  document.querySelector('#char-picker td').click();
+
   /*
-  
   document.getElementById('test').addEventListener('click', () => {
     CANVAS_SETTINGS.applyChanges();
   });
