@@ -47,6 +47,8 @@ g('tool-pencil').addEventListener('click', () => {
 
   CURRENT_PICKS.onToolChange('tool-pencil', () => {
     cleanPrev();
+
+    CURRENT_PICKS.offToolChange('tool-pencil');
   });
 
   // Funciones Internas

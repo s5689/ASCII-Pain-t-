@@ -3,6 +3,7 @@ import { $, g, q } from '../../../lib';
 import './pencil';
 import './eraser';
 import './fill';
+import './select';
 import './zoom';
 import './move';
 
@@ -102,4 +103,12 @@ function getParams(e) {
     preview,
     target,
   };
+}
+
+export function getXY(e) {
+  const txt = e.id;
+  const x = Number(txt.slice(1, txt.indexOf('-')));
+  const y = Number(txt.slice(txt.indexOf('-') + 1, txt.length));
+
+  return { x, y };
 }

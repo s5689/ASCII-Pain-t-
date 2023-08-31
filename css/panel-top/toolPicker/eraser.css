@@ -1,3 +1,13 @@
+#preview-layer[tool='eraser'] {
+  cursor: url('../assets/eraser.cur'), default;
+}
+
+#preview-layer[tool='eraser'] td[hover] {
+  color: black;
+  background-color: black;
+  box-shadow: 0 0 0 1px white;
+}
+
 #tool-eraser {
   background: url('../../assets/eraser-btn.svg') no-repeat center center / contain;
 }

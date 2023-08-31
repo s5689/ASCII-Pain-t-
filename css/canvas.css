@@ -33,36 +33,6 @@
   cursor: not-allowed !important;
 }
 
-#preview-layer[tool='pencil'] {
-  cursor: url('../assets/pencil.cur'), default;
-}
-
-#preview-layer[tool='eraser'] {
-  cursor: url('../assets/eraser.cur'), default;
-}
-
-#preview-layer[tool='eraser'] td[hover] {
-  color: black;
-  background-color: black;
-  box-shadow: 0 0 0 1px white;
-}
-
-#preview-layer[tool='fill'] {
-  cursor: url('../assets/fill.cur') 1 15, default;
-}
-
-#preview-layer[tool='zoom'] {
-  cursor: zoom-in;
-}
-
-#preview-layer[tool='move'] {
-  cursor: grab;
-}
-
-#preview-layer[tool='moving'] {
-  cursor: grabbing;
-}
-
 .pixel {
   font-family: Terminal;
   font-size: calc(12px * var(--zoomLevel)) !important;

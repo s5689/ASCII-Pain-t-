@@ -1,3 +1,7 @@
+#preview-layer[tool='fill'] {
+  cursor: url('../assets/fill.cur') 1 15, default;
+}
+
 #tool-fill {
   transform: scaleX(-1);
   background: url('../../assets/fill-btn.svg') no-repeat center center / contain;

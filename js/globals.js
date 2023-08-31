@@ -135,7 +135,7 @@ export const CURRENT_PICKS = {
     this.toolCallbacks[id] = e;
   },
 
-  offToolCallback(id) {
+  offToolChange(id) {
     delete this.toolCallbacks[id];
   },
 };

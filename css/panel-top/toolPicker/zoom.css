@@ -1,3 +1,7 @@
+#preview-layer[tool='zoom'] {
+  cursor: zoom-in;
+}
+
 #tool-zoom {
   transform: scaleX(-1);
   background: url('../../assets/zoom-btn.svg') no-repeat center center / 34px;

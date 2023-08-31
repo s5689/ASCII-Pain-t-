@@ -1,5 +1,5 @@
 import { COLORS, CURRENT_PICKS, LAYER_MAP } from '../../../globals';
-import { event } from './_toolPicker';
+import { event, getXY } from './_toolPicker';
 import { g } from '../../../lib';
 
 export const eraserSize = {
@@ -81,6 +81,8 @@ g('tool-eraser').addEventListener('click', () => {
 
   CURRENT_PICKS.onToolChange('tool-eraser', () => {
     cleanPrev();
+
+    CURRENT_PICKS.offToolChange('tool-eraser');
   });
 
   // Funciones Internas
@@ -127,9 +129,7 @@ g('tool-eraser').addEventListener('click', () => {
   }
 
   function getArea(e) {
-    const txt = e.id;
-    const x = Number(txt.slice(1, txt.indexOf('-')));
-    const y = Number(txt.slice(txt.indexOf('-') + 1, txt.length));
+    const { x, y } = getXY(e);
     const area = [];
 
     let k = eraserSize.value;

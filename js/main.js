@@ -13,8 +13,8 @@ document.fonts.ready.then(() => {
 
   initVars();
 
+  document.getElementById('tool-select').click();
   /*
-  document.getElementById('tool-fill').click();
   
   document.getElementById('test').addEventListener('click', () => {
     CANVAS_SETTINGS.applyChanges();

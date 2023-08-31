@@ -1,3 +1,7 @@
+#preview-layer[tool='pencil'] {
+  cursor: url('../assets/pencil.cur'), default;
+}
+
 #tool-pencil {
   background: url('../../assets/pencil-btn.svg') no-repeat center center / contain;
 }

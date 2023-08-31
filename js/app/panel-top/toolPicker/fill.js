@@ -1,5 +1,5 @@
 import { CANVAS_SETTINGS, CURRENT_PICKS, LAYER_MAP } from '../../../globals';
-import { event } from './_toolPicker';
+import { event, getXY } from './_toolPicker';
 import { c, g } from '../../../lib';
 
 g('tool-fill').addEventListener('click', () => {
@@ -19,9 +19,8 @@ g('tool-fill').addEventListener('click', () => {
   };
 
   event.mousedown = ({ target }) => {
-    const txt = target.id;
-    const iX = Number(txt.slice(1, txt.indexOf('-')));
-    const iY = Number(txt.slice(txt.indexOf('-') + 1, txt.length));
+    const iX = getXY(target).x;
+    const iY = getXY(target).y;
 
     // Pixel a buscar y reemplazar
     const toReplace = {
@@ -78,6 +77,10 @@ g('tool-fill').addEventListener('click', () => {
       });
 
       currentMap = tempMap;
+    }
+
+    function sleep(e) {
+      return new Promise((resolve) => setTimeout(() => resolve(), e));
     }
 
     /*
@@ -148,6 +151,8 @@ g('tool-fill').addEventListener('click', () => {
 
   CURRENT_PICKS.onToolChange('tool-fill', () => {
     cleanPrev();
+
+    CURRENT_PICKS.offToolChange('tool-fill');
   });
 
   // Funciones Internas
